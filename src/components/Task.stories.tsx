@@ -1,4 +1,4 @@
-import Task from "./Task";
+import Task, { TaskState } from './Task';
 
 export default {
     component: Task,
@@ -11,7 +11,7 @@ export const Default = {
         task: {
             id: 1,
             title: 'Test task',
-            state: 'TASK_INBOX'
+            state: TaskState.TASK_INBOX
         },
     },
 };
@@ -20,7 +20,7 @@ export const Pinned = {
     args: {
         task: {
             ...Default.args.task,
-            state: 'TASK_PINNED',
+            state: TaskState.TASK_PINNED,
         },
     },
 };
@@ -29,7 +29,7 @@ export const Archived = {
     args: {
         task: {
             ...Default.args.task,
-            state: 'TASK_ARCHIVED',
+            state: TaskState.TASK_ARCHIVED,
         },
     },
 };
