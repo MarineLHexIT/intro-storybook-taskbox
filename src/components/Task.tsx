@@ -13,13 +13,10 @@ type TaskType = {
 interface TaskProps {
     task: TaskType;
     onArchiveTask: (task: Task) => void;
-    onPinnedTask: (task: Task) => void;
+    onPinTask: (task: Task) => void;
 }
 
-export default function Task({ task, onArchiveTask, onPinnedTask }: TaskProps) {
-
-    const onPinTask = (id: number) => {
-    };
+export default function Task({ task, onArchiveTask, onPinTask }: TaskProps) {
 
     return <div className={ `list-item ${ task.state }` }>
         <label htmlFor="checked"
