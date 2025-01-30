@@ -12,8 +12,8 @@ type TaskType = {
 
 interface TaskProps {
     task: TaskType;
-    onArchiveTask: (task: Task) => void;
-    onPinTask: (task: Task) => void;
+    onArchiveTask: (task: TaskType) => void;
+    onPinTask: (task: TaskType) => void;
 }
 
 export default function Task({ task, onArchiveTask, onPinTask }: TaskProps) {
