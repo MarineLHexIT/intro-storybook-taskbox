@@ -4,14 +4,14 @@ enum TaskState {
     TASK_ARCHIVED = 'TASK_ARCHIVED',
 }
 
-type Task = {
+type TaskType = {
     id: number;
     title: string;
     state: TaskState;
 }
 
 interface TaskProps {
-    task: Task;
+    task: TaskType;
     onArchiveTask: (task: Task) => void;
     onPinnedTask: (task: Task) => void;
 }
@@ -49,4 +49,4 @@ export default function Task({ task, onArchiveTask, onPinnedTask }: TaskProps) {
     </div>
 }
 
-export { Task, TaskState };
+export { TaskType, TaskState };
