@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, fetchTasks, RootState } from './lib/store';
+import { AppDispatch, fetchTasks, RootState } from '../lib/store';
 import { useEffect } from 'react';
-import TaskList from './components/TaskList';
+import TaskList from './TaskList';
 
 export default function InboxScreen() {
 
