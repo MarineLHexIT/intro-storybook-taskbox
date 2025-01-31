@@ -1,4 +1,4 @@
-import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { configureStore, createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TaskState, TaskType } from '../components/Task';
 
 const defaultTasks = [
@@ -30,6 +30,20 @@ const TaskBoxData = {
     error: null
 };
 
+export const fetchTasks = createAsyncThunk('todos/fetchTodos', async () => {
+    const response = await fetch(
+        'https://jsonplaceholder.typicode.com/todos?userId=1'
+    );
+    const data = await response.json();
+    const result = data.map((task: {id: number, title: string, completed: boolean}) => ({
+        id: task.id,
+        title: task.title,
+        completed: task.completed ? TaskState.TASK_ARCHIVED : TaskState.TASK_INBOX
+    }));
+
+    return result;
+})
+
 const TasksSlice = createSlice({
     name: 'taskbox',
     initialState: TaskBoxData,
@@ -45,6 +59,24 @@ const TasksSlice = createSlice({
                 state.tasks[foundTaskId].state = newTaskState;
             }
         }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchTasks.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+                state.tasks = []
+            })
+            .addCase(fetchTasks.fulfilled, (state, action: PayloadAction<TaskType[]>) => {
+                state.status = 'succeeded';
+                state.error = null;
+                state.tasks = action.payload;
+            })
+            .addCase(fetchTasks.rejected, (state) => {
+                state.status = 'failed';
+                state.error = 'Something went wrong';
+                state.tasks = [];
+            })
     }
 });
 
