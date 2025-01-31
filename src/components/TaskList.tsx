@@ -5,15 +5,11 @@ import { AppDispatch, RootState, updateTaskState } from '../lib/store';
 export default function TaskList() {
 
     const tasks = useSelector((state: RootState) => {
-            const tasksInOrder = [
+            return [
                 ...state.taskbox.tasks.filter((t) => t.state === TaskState.TASK_PINNED),
-                ...state.taskbox.tasks.filter((t) => t.state !== TaskState.TASK_PINNED),
+                ...state.taskbox.tasks.filter((t) => t.state === TaskState.TASK_INBOX),
+                ...state.taskbox.tasks.filter((t) => t.state === TaskState.TASK_ARCHIVED),
             ];
-            const filteredTasks = tasksInOrder.filter(
-                (task) => task.state !== TaskState.TASK_ARCHIVED
-            );
-
-            return filteredTasks;
         }
     );
 
