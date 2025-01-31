@@ -1,5 +1,5 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
-import { TaskState } from '../components/Task';
+import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { TaskState, TaskType } from '../components/Task';
 
 const defaultTasks = [
     {
@@ -34,7 +34,11 @@ const TasksSlice = createSlice({
     name: 'taskbox',
     initialState: TaskBoxData,
     reducers: {
-        updateTaskState: (state, action) => {
+        updateTaskState: (
+            state,
+            action: PayloadAction<Pick<TaskType, "id"> & { newTaskState: TaskState}>
+        ) => {
+
             const { id, newTaskState } = action.payload;
             const foundTaskId = state.tasks.findIndex((task) => task.id === id);
             if ( foundTaskId >= 0 ) {
@@ -53,3 +57,5 @@ const store = configureStore({
 });
 
 export default store;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
