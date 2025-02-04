@@ -31,7 +31,8 @@ export default function Task({ task, onArchiveTask, onPinTask }: TaskProps) {
                   onClick={ () => onArchiveTask(task) }/>
         </label>
         <label htmlFor="title" aria-label={task.title}>
-            <input type="text" value={task.title} readOnly={true} name="title" />
+            <input type="text" value={ task.title } readOnly={ true } name="title"
+                   style={ { backgroundColor: 'red' } }/>
         </label>
         {
             task.state !== TaskState.TASK_ARCHIVED && (
