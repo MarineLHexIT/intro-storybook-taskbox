@@ -5,6 +5,9 @@ import { AppDispatch, RootState, updateTaskState } from '../lib/store';
 export default function TaskList() {
 
     const tasks = useSelector((state: RootState) => {
+
+        debugger;
+
             return [
                 ...state.taskbox.tasks.filter((t) => t.state === TaskState.TASK_PINNED),
                 ...state.taskbox.tasks.filter((t) => t.state === TaskState.TASK_INBOX),
@@ -45,7 +48,7 @@ export default function TaskList() {
 
     if ( status === 'loading' ) {
         return (
-            <div className="list-item" key={ `loading` } data-test-id="loading">
+            <div className="list-item" key={ `loading` } data-testId="loading">
                 { LoadingRow }
                 { LoadingRow }
                 { LoadingRow }
